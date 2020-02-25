@@ -38,5 +38,13 @@ namespace MovieRental_Models
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public virtual User UpdatedByUser { get; set; }
 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+
+        public virtual ICollection<MovieLog> MovieLogs { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+
+        public virtual ICollection<TransactionMovie> TransactionMovies { get; set; }
+
     }   
 }

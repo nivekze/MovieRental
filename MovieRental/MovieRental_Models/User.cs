@@ -33,5 +33,7 @@ namespace MovieRental_Models
         [NotMapped]
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string Token { get; set; }
+
+      
     }
 }

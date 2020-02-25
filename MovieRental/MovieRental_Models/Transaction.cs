@@ -36,17 +36,17 @@ namespace MovieRental_Models
 
         public int CreatedBy { get; set; }
         
-        [ForeignKey("CreatedBy")]
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public virtual User CreatedByUser { get; set; }
+        //[ForeignKey("CreatedBy")]
+        //[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        //public virtual User CreatedByUser { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
         
         public int? UpdatedBy { get; set; }
         
-        [ForeignKey("UpdatedBy")]
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public virtual User UpdatedByUser { get; set; }
+        //[ForeignKey("UpdatedBy")]
+        //[JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        //public virtual User UpdatedByUser { get; set; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public ICollection<TransactionMovie> Movies { get; set; }

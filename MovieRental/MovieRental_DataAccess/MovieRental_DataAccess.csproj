@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200225042356_Initial.cs" />
+    <Compile Remove="Migrations\20200225042356_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200225050238_Initial.cs" />
+    <Compile Remove="Migrations\20200225050238_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200225050535_Initial.cs" />
+    <Compile Remove="Migrations\20200225050535_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200225050843_Initial.cs" />
+    <Compile Remove="Migrations\20200225050843_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200225052000_Initial.cs" />
+    <Compile Remove="Migrations\20200225052000_Initial.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>

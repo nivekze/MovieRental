@@ -18,6 +18,7 @@ using Microsoft.OpenApi.Models;
 
 using MovieRental_Models.Helpers;
 using MovieRental_DataAccess.Context;
+using MovieRental_DataAccess;
 using Microsoft.EntityFrameworkCore;
 using MovieRental_Repository;
 using MovieRental_Infrastructure;
@@ -77,9 +78,12 @@ namespace MovieRental
            });
 
             // Configure database context
-            services.AddDbContext<MovieRentalContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-            );
+            services.AddDbContext(Configuration);
+
+            //services.AddDbContext<MovieRentalContext>(
+            //    options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            //);
+
 
             // DI for Repositories
             services.AddTransient<IUserRepository, UserRepository>();

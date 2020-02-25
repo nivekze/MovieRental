@@ -48,6 +48,22 @@ namespace MovieRental_DataAccess.Context
                 v => string.Join('|', v),
                 v => v.Split('|', StringSplitOptions.RemoveEmptyEntries));
 
+            modelBuilder.Entity<Movie>()
+                .HasMany(m => m.MovieLogs)
+                .WithOne(ml => ml.Movie)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Movie>()
+                .HasMany(m => m.TransactionMovies)
+                .WithOne(ml => ml.Movie)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Transaction>()
+                .HasMany(t => t.Movies)
+                .WithOne(tm => tm.Transaction)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
         }
     }
 }
