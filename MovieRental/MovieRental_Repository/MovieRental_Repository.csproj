@@ -4,4 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MovieRental_DataAccess\MovieRental_DataAccess.csproj" />
+    <ProjectReference Include="..\MovieRental_Infrastructure\MovieRental_Infrastructure.csproj" />
+    <ProjectReference Include="..\MovieRental_Models\MovieRental_Models.csproj" />
+  </ItemGroup>
+
 </Project>
