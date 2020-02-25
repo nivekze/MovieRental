@@ -42,6 +42,12 @@ namespace MovieRental_DataAccess.Context
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Movie>()
+            .Property(e => e.Images)
+            .HasConversion(
+                v => string.Join('|', v),
+                v => v.Split('|', StringSplitOptions.RemoveEmptyEntries));
+
         }
     }
 }
