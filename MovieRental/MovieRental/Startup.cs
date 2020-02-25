@@ -87,6 +87,8 @@ namespace MovieRental
 
             // DI for Repositories
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IMovieRepository, MovieRepository>();
+            services.AddTransient<IMovieLogRepository, MovieLogRepository>();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
