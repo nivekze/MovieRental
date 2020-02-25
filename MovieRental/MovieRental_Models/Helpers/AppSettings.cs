@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace MovieRental.Helpers
+namespace MovieRental_Models.Helpers
 {
     public class AppSettings
     {
