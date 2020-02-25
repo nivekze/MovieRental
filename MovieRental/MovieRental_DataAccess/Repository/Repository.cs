@@ -18,6 +18,7 @@ namespace MovieRental_DataAccess.Repository
         public Repository(MovieRentalContext context)
         {
             _context = context;
+            _context.ChangeTracker.LazyLoadingEnabled = false;
         }
 
         protected void Save() => _context.SaveChanges();

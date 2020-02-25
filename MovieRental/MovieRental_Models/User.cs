@@ -18,6 +18,9 @@ namespace MovieRental_Models
         [JsonIgnore]
         public string PasswordSalt { get; set; }
 
+        [JsonIgnore]
+        public int RoleId { get; set; }
+
         public virtual Role Role { get; set; }
 
         public bool Active { get; set; }

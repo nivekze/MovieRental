@@ -31,11 +31,12 @@ namespace MovieRental_DataAccess.Context
         public MovieRentalContext(DbContextOptions<MovieRentalContext> options)
             : base(options)
         {
-
+           
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
