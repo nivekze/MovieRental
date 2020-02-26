@@ -31,7 +31,7 @@ namespace MovieRental_DataAccess.Context
         public MovieRentalContext(DbContextOptions<MovieRentalContext> options)
             : base(options)
         {
-           
+            this.ChangeTracker.LazyLoadingEnabled = false;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
