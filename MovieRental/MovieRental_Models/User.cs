@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 
 using Newtonsoft.Json;
@@ -38,5 +41,16 @@ namespace MovieRental_Models
         public string Token { get; set; }
 
       
+    }
+
+    public static class UserExtensios {
+        public static bool IsAdmin(this IIdentity identity)
+        {
+            var roles = ((ClaimsIdentity)identity).Claims
+               .Where(c => c.Type == ClaimTypes.Role)
+               .Select(c => c.Value);
+
+            return roles.Contains("Admin");
+        }
     }
 }

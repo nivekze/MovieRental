@@ -10,7 +10,7 @@ namespace MovieRental_Infrastructure
     public interface IMovieRepository : IRepository<Movie>, IPagination<Movie>
     {
         IEnumerable<Movie> FindWithCreatedBy(Func<Movie, bool> predicate);
-        IEnumerable<Movie> GetByIdWithProductPriceLog(int id);
+        IEnumerable<Movie> GetByIdWithMovieLog(int id);
 
         void AddLike(Movie entity, int quantity);
 

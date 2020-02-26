@@ -74,9 +74,11 @@ namespace MovieRental_DataAccess.Migrations
                     Likes = table.Column<int>(nullable: true),
                     RentalPrice = table.Column<decimal>(nullable: false),
                     SalesPrice = table.Column<decimal>(nullable: false),
-                    Available = table.Column<bool>(nullable: false),
+                    Available = table.Column<bool>(nullable: true),
                     Images = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: true),
                     CreatedBy = table.Column<int>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
                     UpdatedBy = table.Column<int>(nullable: true)
                 },
                 constraints: table =>

@@ -43,15 +43,17 @@ namespace MovieRental_Repository
                 return _context.Movies.Where(p => (bool)p.Available && p.Stock > 0 && p.Title.Contains(search)).AsQueryable();
         }
 
-        public IEnumerable<Movie> GetByIdWithProductPriceLog(int id)
+        public IEnumerable<Movie> GetByIdWithMovieLog(int id)
         {
             return _context.Movies.Where(p => p.Id == id).Include(p => p.MovieLogs).ToList();
         }
 
-        public IQueryable<Movie> GetPaginated(string filter, int initialPage, int pageSize, string order, out int totalRecords, out int recordsFiltered)
+        public IQueryable<Movie> GetPaginated(string filter, int initialPage, int pageSize, string order, out int totalRecords, out int recordsFiltered, bool available)
         {
             var data = _context.Movies.AsQueryable();
             totalRecords = data.Count();
+
+            data = data.Where(x => x.Available == available);
 
             if (!string.IsNullOrEmpty(filter))
             {

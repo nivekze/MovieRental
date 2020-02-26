@@ -14,23 +14,27 @@ namespace MovieRental_Models
         
         public string Description { get; set; }
         
-        public int Stock { get; set; }
+        public int? Stock { get; set; }
         
         public int? Likes { get; set; }
         
-        public decimal RentalPrice { get; set; }
+        public decimal? RentalPrice { get; set; }
         
-        public decimal SalesPrice { get; set; }
+        public decimal? SalesPrice { get; set; }
         
-        public bool Available { get; set; }
+        public bool? Available { get; set; }
 
         public string[] Images { get; set; }
+
+        public DateTime CreatedAt { get; set; }
 
         public int CreatedBy { get; set; }
         
         [ForeignKey("CreatedBy")]
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public virtual User CreatedByUser { get; set; }
+
+        public DateTime? UpdatedAt { get; set; }
 
         public int? UpdatedBy { get; set; }
 

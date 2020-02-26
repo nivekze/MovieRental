@@ -233,3 +233,6 @@ MovieRental/MovieRental/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Caching.Mem
 MovieRental/MovieRental/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Configuration.Abstractions.dll
 MovieRental/MovieRental/bin/Debug/netcoreapp3.1/Microsoft.Extensions.Configuration.Binder.dll
 MovieRental/.vs/MovieRental/DesignTimeBuild/.dtbcache
+MovieRental/MovieRental/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.JsonPatch.dll
+MovieRental/MovieRental/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+MovieRental/MovieRental/bin/Debug/netcoreapp3.1/Newtonsoft.Json.Bson.dll
