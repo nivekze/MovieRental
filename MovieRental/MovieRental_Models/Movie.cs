@@ -21,6 +21,8 @@ namespace MovieRental_Models
         public decimal? RentalPrice { get; set; }
         
         public decimal? SalesPrice { get; set; }
+
+        public decimal? PenaltyPerDay { get; set; }
         
         public bool? Available { get; set; }
 

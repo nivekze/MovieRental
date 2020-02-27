@@ -74,6 +74,7 @@ namespace MovieRental_DataAccess.Migrations
                     Likes = table.Column<int>(nullable: true),
                     RentalPrice = table.Column<decimal>(nullable: false),
                     SalesPrice = table.Column<decimal>(nullable: false),
+                    PenaltyPerDay = table.Column<decimal>(nullable: false),
                     Available = table.Column<bool>(nullable: true),
                     Images = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: true),
