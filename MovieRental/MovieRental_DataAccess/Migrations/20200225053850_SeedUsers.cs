@@ -10,7 +10,7 @@ namespace MovieRental_DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             var userSalt = GetSalt();
-            var userPassword = GetHash("k3vin19*" + userSalt);
+            var userPassword = GetHash("kevin20*" + userSalt);
             migrationBuilder.InsertData(
                table: "Users",
                columns: new[] { "Username", "Password", "PasswordSalt", "RoleId", "Active", "CreatedAt", "EmailConfirmed" },
