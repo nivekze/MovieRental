@@ -8,6 +8,7 @@ namespace MovieRental_Models.DTO
     public class UserDTO
     {
         [Required]
+        [EmailAddress]
         public string Username { get; set; }
 
         [Required]

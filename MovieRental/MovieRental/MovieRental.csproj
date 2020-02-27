@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MovieRental_Notification\MovieRental_Notification.csproj" />
     <ProjectReference Include="..\MovieRental_Repository\MovieRental_Repository.csproj" />
   </ItemGroup>
 

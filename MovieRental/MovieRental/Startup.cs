@@ -22,6 +22,8 @@ using MovieRental_DataAccess;
 using Microsoft.EntityFrameworkCore;
 using MovieRental_Repository;
 using MovieRental_Infrastructure;
+using MovieRental_Notification;
+using MovieRental_Notification.Repository;
 
 namespace MovieRental
 {
@@ -83,17 +85,15 @@ namespace MovieRental
             // Configure database context
             services.AddDbContext(Configuration);
 
-            //services.AddDbContext<MovieRentalContext>(
-            //    options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-            //);
-
-
             // DI for Repositories
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IMovieRepository, MovieRepository>();
             services.AddTransient<IMovieLogRepository, MovieLogRepository>();
             services.AddTransient<ITransactionRepository, TransactionRepository>();
             services.AddTransient<ITransactionMovieRepository, TransactionMovieRepository>();
+
+            // DI for Notifications
+            services.AddSingleton<INotificationRepository, NotificationRepository>();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>

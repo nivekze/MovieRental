@@ -45,6 +45,7 @@ namespace MovieRental_DataAccess.Migrations
                     Password = table.Column<string>(nullable: true),
                     PasswordSalt = table.Column<string>(nullable: true),
                     RoleId = table.Column<int>(nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
                     Active = table.Column<bool>(nullable: false),
                     CreatedAt = table.Column<DateTime>(nullable: true),
                     CreatedBy = table.Column<string>(nullable: true),

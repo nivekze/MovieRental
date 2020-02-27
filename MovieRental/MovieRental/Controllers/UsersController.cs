@@ -10,6 +10,7 @@ using MovieRental_Infrastructure;
 using MovieRental_Models;
 using MovieRental_Models.DTO;
 using MovieRental_Repository.Helpers;
+using MovieRental_Notification;
 
 namespace MovieRental.Controllers
 {
@@ -19,29 +20,40 @@ namespace MovieRental.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
+        private readonly INotificationRepository _notificationRepository;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(
+            IUserRepository userRepository,
+            INotificationRepository notificationRepository)
         {
             _userRepository = userRepository;
+            _notificationRepository = notificationRepository;
         }
 
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody]UserDTO userParam)
         {
-            var userSalt = _userRepository.Find(u => u.Username == userParam.Username).SingleOrDefault();
+            try
+            {
+                var userSalt = _userRepository.Find(u => u.Username == userParam.Username).SingleOrDefault();
 
-            if (userSalt == null)
-                return BadRequest(new { Message = "User not exits" });
+                if (userSalt == null)
+                    return BadRequest(new { Message = "User not exits" });
 
-            userParam.Password = PasswordHasher.GetHash(userParam.Password + userSalt.PasswordSalt);
+                userParam.Password = PasswordHasher.GetHash(userParam.Password + userSalt.PasswordSalt);
 
-            var user = _userRepository.Authenticate(userParam.Username, userParam.Password);
+                var user = _userRepository.Authenticate(userParam.Username, userParam.Password);
 
-            if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
+                if (user == null)
+                    return BadRequest(new { message = "Username or password is incorrect" });
 
-            return Ok(user);
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
         }
 
         // GET: api/Users
@@ -55,73 +67,162 @@ namespace MovieRental.Controllers
         [HttpGet("{id}")]
         public ActionResult<User> GetUser(int id)
         {
-            var user = _userRepository.GetByIdWithRol(id);
-
-            if (user == null)
+            try
             {
-                return NotFound();
-            }
+                var user = _userRepository.GetByIdWithRol(id);
+                user.Password = null;
+                user.PasswordSalt = null;
 
-            return user;
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                return user;
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
         }
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
         public IActionResult PutUser(int id, User user)
         {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
-
-
             try
             {
+                if (id != user.Id)
+                {
+                    return BadRequest();
+                }
+
                 _userRepository.Update(user);
 
+                return NoContent();
             }
             catch (Exception ex)
             {
-                throw ex;
+                return BadRequest(new { ex.Message });
             }
-
-            return NoContent();
         }
 
         // POST: api/Users
         [HttpPost]
         public ActionResult<User> PostUser(UserDTO user)
         {
-            if (_userRepository.Count(u => u.Username.Equals(user.Username)) > 0)
-                return BadRequest(new { Message = "User alredy exists" });
+            try
+            {
+                if (_userRepository.Count(u => u.Username.Equals(user.Username)) > 0)
+                    return BadRequest(new { Message = "User alredy exists" });
 
-            var newUser = new User();
-            newUser.Username = user.Username;
-            newUser.Password = user.Password;
-            newUser.RoleId = user.RoleId;
-            newUser.Active = user.Active ?? true;
-            newUser.PasswordSalt = PasswordHasher.GetSalt();
-            newUser.Password = PasswordHasher.GetHash(user.Password + newUser.PasswordSalt);
-            newUser.CreatedAt = DateTime.Now;
+                var newUser = new User();
+                newUser.Username = user.Username;
+                newUser.Password = user.Password;
+                newUser.RoleId = user.RoleId;
+                newUser.Active = user.Active ?? true;
+                newUser.PasswordSalt = PasswordHasher.GetSalt();
+                newUser.Password = PasswordHasher.GetHash(user.Password + newUser.PasswordSalt);
+                newUser.CreatedAt = DateTime.Now;
 
-            _userRepository.Create(newUser);
+                _userRepository.Create(newUser);
+                var baseUrl = $"{Request.Scheme}://{Request.Host}/api/users/{newUser.Username}/confirm-account";
 
-            return CreatedAtAction("GetUser", new { id = newUser.Id }, newUser);
+                _notificationRepository.SendEmailConfirmingAccount(newUser.Username, "Movie Rental - Confirming email for new account", baseUrl);
+                return CreatedAtAction("GetUser", new { id = newUser.Id }, newUser);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
         }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public ActionResult<User> DeleteUser(int id)
         {
-            var user = _userRepository.GetById(id);
-            if (user == null)
+            try
             {
-                return NotFound();
+                var user = _userRepository.GetById(id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                _userRepository.Delete(user);
+
+                return user;
             }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+        }
 
-            _userRepository.Delete(user);
+        // PUT: api/Users/example@test.dev/confirm-account
+        [HttpGet("{username}/confirm-account")]
+        [AllowAnonymous]
+        public IActionResult GetConfirmAccount(string username)
+        {
+            try
+            {
+                try
+                {
+                    var user = _userRepository.Find(u => u.Username.Equals(username)).FirstOrDefault();
+                    user.EmailConfirmed = true;
+                    _userRepository.Update(user);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
 
-            return user;
+                return Ok(new { 
+                    Message = "Email confirmed"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
+        }
+
+        // PUT: api/Users/example@test.dev/recovery-password
+        [HttpGet("{username}/recovery-password")]
+        [AllowAnonymous]
+        public IActionResult GetRecoveryPassword(string username)
+        {
+            try
+            {
+                try
+                {
+                    var user = _userRepository.Find(u => u.Username.Equals(username)).FirstOrDefault();
+
+                    if (user == null || string.IsNullOrWhiteSpace(user.Username))
+                    {
+                        return NotFound();
+                    }
+                    var newPassword = RandomGenerator.RandomPassword();
+                    user.PasswordSalt = PasswordHasher.GetSalt();
+                    user.Password = PasswordHasher.GetHash(newPassword + user.PasswordSalt);
+                    _userRepository.Update(user);
+                    _notificationRepository.SendEmailRecoveryPassword(user.Username, "Movie Rental - Confirming email for new account", newPassword);
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+                return Ok(new
+                {
+                    Message = "We sent the new password to your email"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { ex.Message });
+            }
         }
     }
 }

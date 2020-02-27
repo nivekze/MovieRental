@@ -19,7 +19,6 @@ namespace MovieRental.Controllers
     {
         private readonly IMovieRepository _movieRepository;
         private readonly IMovieLogRepository _movieLogRepository;
-
         public MoviesController(
             IMovieRepository movieRepository,
             IMovieLogRepository movieLogRepository)

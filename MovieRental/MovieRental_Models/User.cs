@@ -26,6 +26,8 @@ namespace MovieRental_Models
 
         public virtual Role Role { get; set; }
 
+        public bool EmailConfirmed { get; set; }
+
         public bool Active { get; set; }
 
         public DateTime? CreatedAt { get; set; }
