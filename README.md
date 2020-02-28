@@ -51,4 +51,4 @@ For the API doc you can check the available methods enter the following URL `htt
 
 For import the postman collection use the following link
 
-> 
+> https://www.getpostman.com/collections/612aedeff1bc35cb4307
