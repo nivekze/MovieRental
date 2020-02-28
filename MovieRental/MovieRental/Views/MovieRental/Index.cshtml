@@ -1,0 +1,116 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Movie Rental</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="~/dashboard.css" rel="stylesheet">
+
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .dataTables_filter {
+            visibility: hidden !important;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Movie Rental</a>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search movies by title" id="globalSearch">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="javascript:void(0)" id="globalSearchButton">Search</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <main role="main" class="col-md-12 col-lg-12 pt-3 px-4">
+                <div class="table-responsive">
+                    <table id="example" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Stock</th>
+                                <th>Sales Price</th>
+                                <th>Rental Price</th>
+                                <th>Popularity</th>
+                                <th>Active</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Stock</th>
+                                <th>Sales Price</th>
+                                <th>Rental Price</th>
+                                <th>Popularity</th>
+                                <th>Active</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>window.jQuery || document.write('<script src="~/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/js/vendor/popper.min.js"></script>
+    <script src="~/dist/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var table = $('#example').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "@Url.Action("GetMovies", "Movies")",
+                "columns": [
+                    { "data": "id", "orderable" : false},
+                    { "data": "title", "orderable": false},
+                    { "data": "description", "orderable": false},
+                    { "data": "stock", "orderable": false},
+                    { "data": "salesPrice", "orderable": false },
+                    { "data": "rentalPrice", "orderable": false},
+                    { "data": "likes" },
+                    { "data": "available", "orderable": false}
+                ],
+                "order": [[5, 'desc']],
+                "language": {
+                    "infoFiltered": ""
+                },
+                "lengthChange": false
+            });
+
+            // #myInput is a <input type="text"> element
+            $('#globalSearch').on('keyup', function () {
+                table.search(this.value).draw();
+            });
+
+            $('#globalSearchButton').on('click', function () {
+                table.search($('#globalSearch').val()).draw();
+            })
+        });
+
+
+    </script>
+</body>
+</html>

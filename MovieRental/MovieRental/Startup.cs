@@ -41,7 +41,8 @@ namespace MovieRental
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers()
+            services.AddMvc(
+                option => option.EnableEndpointRouting = false)
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
@@ -130,9 +131,16 @@ namespace MovieRental
 
             app.UseAuthentication();
 
-            app.UseEndpoints(endpoints =>
+            app.UseStaticFiles();
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //});
+
+            app.UseMvc(routes =>
             {
-                endpoints.MapControllers();
+                routes.MapRoute("default", "{controller=MovieRental}/{action=Index}/{id?}");
             });
         }
     }
