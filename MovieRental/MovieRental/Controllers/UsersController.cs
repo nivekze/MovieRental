@@ -88,7 +88,7 @@ namespace MovieRental.Controllers
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
-        public IActionResult PutUser(int id, User user)
+        public IActionResult PutUser(int id, UserUpdateDTO user)
         {
             try
             {
@@ -96,10 +96,20 @@ namespace MovieRental.Controllers
                 {
                     return BadRequest();
                 }
+                var updUser = _userRepository.GetById(id);
 
-                _userRepository.Update(user);
+                if (!string.IsNullOrWhiteSpace(user.Password))
+                {
+                    updUser.PasswordSalt = PasswordHasher.GetSalt();
+                    updUser.Password = PasswordHasher.GetHash(user.Password + updUser.PasswordSalt);
+                }
 
-                return NoContent();
+                updUser.Active = user.Active ?? updUser.Active;
+                updUser.RoleId = user.RoleId ?? updUser.RoleId;
+
+                _userRepository.Update(updUser);
+
+                return Ok(new { Message = "User updated!" });
             }
             catch (Exception ex)
             {
