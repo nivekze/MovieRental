@@ -81,7 +81,7 @@ namespace MovieRental.Controllers
                     newTransactionMovie.MovieId = movie.Id;
                     newTransactionMovie.ProductQuantity = item.MovieQuantity;
                     newTransactionMovie.Price = (decimal)movie.SalesPrice;
-                    newTransactionMovie.SubTotal = decimal.Round((newTransactionMovie.ProductQuantity * newTransactionMovie.Price), 2);
+                    newTransactionMovie.SubTotal = decimal.Round((newTransactionMovie.ProductQuantity * movie.SalesPrice.Value), 2);
                     newTransactionMovie.CreatedBy = userId;
                     newTransactionMovie.CreatedAt = DateTime.Now;
 
@@ -189,7 +189,7 @@ namespace MovieRental.Controllers
                     newTransactionMovie.MovieId = movie.Id;
                     newTransactionMovie.ProductQuantity = item.MovieQuantity;
                     newTransactionMovie.Price = (decimal)movie.RentalPrice * days;
-                    newTransactionMovie.SubTotal = decimal.Round((newTransactionMovie.ProductQuantity * newTransactionMovie.Price), 2);
+                    newTransactionMovie.SubTotal = decimal.Round((newTransactionMovie.ProductQuantity * movie.RentalPrice.Value), 2);
                     newTransactionMovie.CreatedBy = userId;
                     newTransactionMovie.CreatedAt = DateTime.Now;
 
@@ -257,7 +257,7 @@ namespace MovieRental.Controllers
 
                 }
                 //Update total purchase
-                transaction.Total += transaction.Penalty.Value;
+                transaction.Total += transaction.Penalty ?? 0;
                 transaction.ReturnedDate = transactionDate;
                 transaction.UpdatedAt = DateTime.Now;
                 transaction.UpdatedBy = userId;
