@@ -138,7 +138,7 @@ namespace MovieRental.Controllers
                 _userRepository.Create(newUser);
                 var baseUrl = $"{Request.Scheme}://{Request.Host}/api/users/{newUser.Username}/confirm-account";
 
-                _notificationRepository.SendEmailConfirmingAccount(newUser.Username, "Movie Rental - Confirming email for new account", baseUrl);
+                //_notificationRepository.SendEmailConfirmingAccount(newUser.Username, "Movie Rental - Confirming email for new account", baseUrl);
                 return CreatedAtAction("GetUser", new { id = newUser.Id }, newUser);
             }
             catch (Exception ex)
@@ -216,7 +216,7 @@ namespace MovieRental.Controllers
                     user.PasswordSalt = PasswordHasher.GetSalt();
                     user.Password = PasswordHasher.GetHash(newPassword + user.PasswordSalt);
                     _userRepository.Update(user);
-                    _notificationRepository.SendEmailRecoveryPassword(user.Username, "Movie Rental - Confirming email for new account", newPassword);
+                    //_notificationRepository.SendEmailRecoveryPassword(user.Username, "Movie Rental - Confirming email for new account", newPassword);
 
                 }
                 catch (Exception ex)

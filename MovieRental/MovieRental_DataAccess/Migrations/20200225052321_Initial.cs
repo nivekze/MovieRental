@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MovieRental_DataAccess.Migrations
@@ -12,10 +13,10 @@ namespace MovieRental_DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true, maxLength: 500),
                     Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false)
+                    CreatedAt = table.Column<DateTime>(nullable: false, type: "datetime")
                 },
                 constraints: table =>
                 {
@@ -27,8 +28,8 @@ namespace MovieRental_DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true, maxLength: 500)
                 },
                 constraints: table =>
                 {
@@ -40,17 +41,17 @@ namespace MovieRental_DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    PasswordSalt = table.Column<string>(nullable: true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Username = table.Column<string>(nullable: true, maxLength: 500),
+                    Password = table.Column<string>(nullable: true, maxLength: 1500),
+                    PasswordSalt = table.Column<string>(nullable: true, maxLength: 1500),
                     RoleId = table.Column<int>(nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    EmailConfirmed = table.Column<int>(nullable: false),
                     Active = table.Column<bool>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: true),
-                    CreatedBy = table.Column<string>(nullable: true),
-                    UpdatedAt = table.Column<DateTime>(nullable: true),
-                    UpdatedBy = table.Column<string>(nullable: true)
+                    CreatedAt = table.Column<DateTime>(nullable: true, type: "datetime"),
+                    CreatedBy = table.Column<string>(nullable: true, maxLength: 500),
+                    UpdatedAt = table.Column<DateTime>(nullable: true, type: "datetime"),
+                    UpdatedBy = table.Column<string>(nullable: true, maxLength: 500)
                 },
                 constraints: table =>
                 {
@@ -68,19 +69,19 @@ namespace MovieRental_DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(nullable: true, maxLength: 500),
+                    Description = table.Column<string>(nullable: true, maxLength: 500),
                     Stock = table.Column<int>(nullable: false),
                     Likes = table.Column<int>(nullable: true),
                     RentalPrice = table.Column<decimal>(nullable: false),
                     SalesPrice = table.Column<decimal>(nullable: false),
                     PenaltyPerDay = table.Column<decimal>(nullable: false),
                     Available = table.Column<bool>(nullable: true),
-                    Images = table.Column<string>(nullable: true),
-                    CreatedAt = table.Column<DateTime>(nullable: true),
+                    Images = table.Column<string>(nullable: true, maxLength: 2500),
+                    CreatedAt = table.Column<DateTime>(nullable: true, type: "datetime"),
                     CreatedBy = table.Column<int>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    UpdatedAt = table.Column<DateTime>(nullable: true, type: "datetime"),
                     UpdatedBy = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -105,17 +106,17 @@ namespace MovieRental_DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     TransactionTypeId = table.Column<int>(nullable: false),
                     MoviesQuantity = table.Column<int>(nullable: false),
                     Total = table.Column<decimal>(nullable: false),
-                    ReturnScheduleDate = table.Column<DateTime>(nullable: true),
-                    ReturnedDate = table.Column<DateTime>(nullable: true),
+                    ReturnScheduleDate = table.Column<DateTime>(nullable: true, type: "datetime"),
+                    ReturnedDate = table.Column<DateTime>(nullable: true, type: "datetime"),
                     Penalty = table.Column<decimal>(nullable: true),
                     ClientId = table.Column<int>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false, type: "datetime"),
                     CreatedBy = table.Column<int>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    UpdatedAt = table.Column<DateTime>(nullable: true, type: "datetime"),
                     UpdatedBy = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -140,11 +141,11 @@ namespace MovieRental_DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Column = table.Column<string>(nullable: true),
-                    OldValue = table.Column<string>(nullable: true),
-                    NewValue = table.Column<string>(nullable: true),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Column = table.Column<string>(nullable: true, maxLength: 2500),
+                    OldValue = table.Column<string>(nullable: true, maxLength: 2500),
+                    NewValue = table.Column<string>(nullable: true, maxLength: 2500),
+                    CreatedAt = table.Column<DateTime>(nullable: false, type: "datetime"),
                     MovieId = table.Column<int>(nullable: false),
                     CreatedBy = table.Column<int>(nullable: false)
                 },
@@ -169,12 +170,12 @@ namespace MovieRental_DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ProductQuantity = table.Column<int>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
                     SubTotal = table.Column<decimal>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false, type: "datetime"),
+                    UpdatedAt = table.Column<DateTime>(nullable: true, type: "datetime"),
                     TransactionId = table.Column<int>(nullable: false),
                     MovieId = table.Column<int>(nullable: false),
                     CreatedBy = table.Column<int>(nullable: false),

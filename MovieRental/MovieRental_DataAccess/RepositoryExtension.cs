@@ -41,7 +41,22 @@ namespace MovieRental_DataAccess
                     sqlOptions.MigrationsAssembly(migrationsAssembly);
                     sqlOptions.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
                 });
-                options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
+                //options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
+            });
+        }
+
+        public static void AddMySqlDbContext(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("MySqlConnection");
+            var migrationsAssembly = typeof(MovieRentalContext).GetTypeInfo().Assembly.GetName().Name;
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 20));
+            services.AddDbContext<MovieRentalContext>(options =>
+            {
+                options.UseMySql(connectionString, serverVersion, mySqlOptionsAction: sqlOptions =>
+                {
+                    sqlOptions.MigrationsAssembly(migrationsAssembly);
+                });
+                //options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
             });
         }
 

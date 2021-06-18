@@ -10,13 +10,13 @@ namespace MovieRental_DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "TransactionTypes",
                 columns: new[] { "Name"},
-                values: new object[] { "Rental", true, DateTime.Now }
+                values: new object[] { "Rental" }
             );
 
             migrationBuilder.InsertData(
                table: "TransactionTypes",
                columns: new[] { "Name" },
-               values: new object[] { "Purchase", true, DateTime.Now }
+               values: new object[] { "Purchase" }
            );
         }
 

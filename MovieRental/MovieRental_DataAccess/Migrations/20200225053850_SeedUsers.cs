@@ -13,16 +13,16 @@ namespace MovieRental_DataAccess.Migrations
             var userPassword = GetHash("kevin20*" + userSalt);
             migrationBuilder.InsertData(
                table: "Users",
-               columns: new[] { "Username", "Password", "PasswordSalt", "RoleId", "Active", "CreatedAt", "EmailConfirmed" },
-               values: new object[] { "admin@mr.dev", userPassword, userSalt, 1, true, DateTime.Now, true }
+               columns: new[] { "Username", "Password", "PasswordSalt", "RoleId", "Active", "CreatedAt"},
+               values: new object[] { "admin@mr.dev", userPassword, userSalt, 1, true, DateTime.Now }
            );
 
             userSalt = GetSalt();
             userPassword = GetHash("1234" + userSalt);
             migrationBuilder.InsertData(
                table: "Users",
-               columns: new[] { "Username", "Password", "PasswordSalt", "RoleId", "Active", "CreatedAt", "EmailConfirmed" },
-               values: new object[] { "client@mr.dev", userPassword, userSalt, 2, true, DateTime.Now, true }
+               columns: new[] { "Username", "Password", "PasswordSalt", "RoleId", "Active", "CreatedAt" },
+               values: new object[] { "client@mr.dev", userPassword, userSalt, 2, true, DateTime.Now }
            );
         }
 
