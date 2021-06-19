@@ -26,24 +26,24 @@ namespace MovieRental_DataAccess
         {
             model.Entity<T>()
                .Property(field)
-               .UseSqlServerIdentityColumn()
+               //.UseSqlServerIdentityColumn()
                .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Ignore);
         }
 
-        public static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
-        {
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
-            var migrationsAssembly = typeof(MovieRentalContext).GetTypeInfo().Assembly.GetName().Name;
-            services.AddDbContext<MovieRentalContext>(options =>
-            {
-                options.UseSqlServer(connectionString, sqlServerOptionsAction: sqlOptions =>
-                {
-                    sqlOptions.MigrationsAssembly(migrationsAssembly);
-                    sqlOptions.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
-                });
-                //options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
-            });
-        }
+        //public static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
+        //{
+        //    var connectionString = configuration.GetConnectionString("DefaultConnection");
+        //    var migrationsAssembly = typeof(MovieRentalContext).GetTypeInfo().Assembly.GetName().Name;
+        //    services.AddDbContext<MovieRentalContext>(options =>
+        //    {
+        //        options.UseSqlServer(connectionString, sqlServerOptionsAction: sqlOptions =>
+        //        {
+        //            sqlOptions.MigrationsAssembly(migrationsAssembly);
+        //            sqlOptions.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
+        //        });
+        //        //options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
+        //    });
+        //}
 
         public static void AddMySqlDbContext(this IServiceCollection services, IConfiguration configuration)
         {
