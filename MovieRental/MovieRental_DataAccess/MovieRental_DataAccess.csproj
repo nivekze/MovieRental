@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MovieRental_AWSSecretManager\MovieRental_AWSSecretManager.csproj" />
     <ProjectReference Include="..\MovieRental_Infrastructure\MovieRental_Infrastructure.csproj" />
     <ProjectReference Include="..\MovieRental_Models\MovieRental_Models.csproj" />
   </ItemGroup>

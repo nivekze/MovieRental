@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using MovieRental_AWSSecretManager;
 using MovieRental_DataAccess.Context;
 
 namespace MovieRental_DataAccess
@@ -45,9 +45,9 @@ namespace MovieRental_DataAccess
         //    });
         //}
 
-        public static void AddMySqlDbContext(this IServiceCollection services, IConfiguration configuration)
+        public static void AddMySqlDbContext(this IServiceCollection services, IConfiguration configuration, DbSecrectConnetion dbSecret)
         {
-            var connectionString = configuration.GetConnectionString("MySqlConnection");
+            var connectionString = BuildConnectionString(configuration.GetConnectionString("MySqlConnection"), dbSecret);
             var migrationsAssembly = typeof(MovieRentalContext).GetTypeInfo().Assembly.GetName().Name;
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 20));
             services.AddDbContext<MovieRentalContext>(options =>
@@ -58,6 +58,13 @@ namespace MovieRental_DataAccess
                 });
                 //options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
             });
+        }
+
+        private static string BuildConnectionString(string baseConnection, DbSecrectConnetion dbSecrect) {
+            return baseConnection.Replace("{HOST}", dbSecrect.host)
+                .Replace("{PORT}", dbSecrect.port.ToString())
+                .Replace("{USERNAME}", dbSecrect.username)
+                .Replace("{PASSWORD}", dbSecrect.password);
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text.Json;
 using Amazon;
 using Amazon.SecretsManager;
 using Amazon.SecretsManager.Model;
@@ -84,6 +85,18 @@ namespace MovieRental_AWSSecretManager
             }
 
             // Your code goes here.
+        }
+
+        public static DbSecrectConnetion GetDbSecrectConnetion() {
+            try
+            {
+                var json = GetSecret();
+                return JsonSerializer.Deserialize<DbSecrectConnetion>(json);
+            }
+            catch {
+                throw;
+            }
+            
         }
     }
 }
