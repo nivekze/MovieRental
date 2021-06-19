@@ -45,6 +45,21 @@ namespace MovieRental_DataAccess
         //    });
         //}
 
+        public static void AddMySqlDbContext(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("MySqlConnection2");
+            var migrationsAssembly = typeof(MovieRentalContext).GetTypeInfo().Assembly.GetName().Name;
+            var serverVersion = new MySqlServerVersion(new Version(8, 0, 20));
+            services.AddDbContext<MovieRentalContext>(options =>
+            {
+                options.UseMySql(connectionString, serverVersion, mySqlOptionsAction: sqlOptions =>
+                {
+                    sqlOptions.MigrationsAssembly(migrationsAssembly);
+                });
+                //options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
+            });
+        }
+
         public static void AddMySqlDbContext(this IServiceCollection services, IConfiguration configuration, DbSecrectConnetion dbSecret)
         {
             var connectionString = BuildConnectionString(configuration.GetConnectionString("MySqlConnection"), dbSecret);

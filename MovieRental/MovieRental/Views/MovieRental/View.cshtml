@@ -1,0 +1,114 @@
+﻿@model MovieRental_Models.Movie;
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Movie Rental - View</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="~/dashboard.css" rel="stylesheet">
+
+    <style type="text/css">
+        .dataTables_filter {
+            visibility: hidden !important;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Index", "MovieRental")">Movie Rental</a>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="@Url.Action("Index", "MovieRental")" id="globalSearchButton">Go Back</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <main role="main" class="col-md-8 col-lg-8 offset-md-2 offset-lg-2 pt-3 px-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" value="@Model.Title" readonly>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" id="description" name="description" readonly>@Model.Description</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="stock">Stock</label>
+                            <input type="text" class="form-control" id="stock" name="stock" value="@Model.Stock" readonly>
+
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="salesPrice">Sales Price</label>
+                            <input type="text" class="form-control" id="salesPrice" name="salesPrice" value="@Model.SalesPrice" readonly>
+
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="rentalPrice">Rental Price</label>
+                            <input type="text" class="form-control" id="rentalPrice" name="rentalPrice" value="@Model.RentalPrice" readonly>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="popularity">Popularity</label>
+                            <input type="text" class="form-control" id="popularity" name="popularity" value="@Model.Likes" readonly>
+
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="title">Active</label>
+                            <input type="text" class="form-control" id="active" name="active" value="@Model.Available" readonly>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <a  href="@Url.Action("Index", "MovieRental")" class="btn btn-outline-secondary float-right">Go Back</a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>window.jQuery || document.write('<script src="~/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="~/assets/js/vendor/popper.min.js"></script>
+    <script src="~/dist/js/bootstrap.min.js"></script>
+    <script>
+     
+    </script>
+</body>
+</html>

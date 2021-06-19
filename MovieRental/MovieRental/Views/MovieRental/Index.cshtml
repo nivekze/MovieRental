@@ -24,7 +24,7 @@
 
 <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Movie Rental</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Index", "MovieRental")">Movie Rental</a>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search movies by title" id="globalSearch">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
@@ -37,11 +37,15 @@
         <div class="row">
 
             <main role="main" class="col-md-12 col-lg-12 pt-3 px-4">
+                <div class="row">
+                    <div class="col-12">
+                        <a href="@Url.Action("New", "MovieRental")" class="btn btn-primary float-right">New Movie</a>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table id="example" class="display" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Id</th>
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Stock</th>
@@ -49,11 +53,11 @@
                                 <th>Rental Price</th>
                                 <th>Popularity</th>
                                 <th>Active</th>
+                                <th>-</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Id</th>
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Stock</th>
@@ -61,6 +65,7 @@
                                 <th>Rental Price</th>
                                 <th>Popularity</th>
                                 <th>Active</th>
+                                <th>-</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -84,14 +89,20 @@
                 "serverSide": true,
                 "ajax": "@Url.Action("GetMovies", "Movies")",
                 "columns": [
-                    { "data": "id", "orderable" : false},
                     { "data": "title", "orderable": false},
                     { "data": "description", "orderable": false},
                     { "data": "stock", "orderable": false},
                     { "data": "salesPrice", "orderable": false },
                     { "data": "rentalPrice", "orderable": false},
                     { "data": "likes" },
-                    { "data": "available", "orderable": false}
+                    { "data": "available", "orderable": false },
+                    {
+                        "data": "id",
+                        "orderable": false,
+                        "render": function (data, type, row, meta) {
+                            return '<a href="/MovieRental/View/' + data + '">View</a> | <a href="/MovieRental/Edit/' + data + '">Edit</a>';
+                        }
+                    }               
                 ],
                 "order": [[5, 'desc']],
                 "language": {
