@@ -8,7 +8,7 @@ namespace MovieRental_AWSSecretManager
 {
     public static class SecretManager
     {
-        public static void GetSecret()
+        public static string GetSecret()
         {
             string secretName = "CRA614/MySQL/MovieRental/Test";
             string region = "us-east-1";
@@ -73,15 +73,14 @@ namespace MovieRental_AWSSecretManager
             // Depending on whether the secret is a string or binary, one of these fields will be populated.
             if (response.SecretString != null)
             {
-                secret = response.SecretString;
-                Console.WriteLine("AWS Secret: ", secret);
+                return secret = response.SecretString;
             }
             else
             {
                 memoryStream = response.SecretBinary;
                 StreamReader reader = new StreamReader(memoryStream);
                 string decodedBinarySecret = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(reader.ReadToEnd()));
-                Console.WriteLine("AWS Decoded Binary Secret: ", decodedBinarySecret);
+                return decodedBinarySecret;
             }
 
             // Your code goes here.

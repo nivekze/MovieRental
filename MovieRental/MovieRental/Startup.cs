@@ -84,7 +84,7 @@ namespace MovieRental
                };
            });
 
-            SecretManager.GetSecret();
+            Console.WriteLine(SecretManager.GetSecret());
             // Configure database context
             services.AddMySqlDbContext(Configuration);
 
