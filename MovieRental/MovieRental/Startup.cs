@@ -125,7 +125,7 @@ namespace MovieRental
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Movie Rental API V1");
             });
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
