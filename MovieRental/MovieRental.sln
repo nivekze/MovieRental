@@ -15,9 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieRental_Infrastructure"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieRental_Repository", "MovieRental_Repository\MovieRental_Repository.csproj", "{4BFA48D1-8578-4925-ADEE-3C28AB283F37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieRental_Test", "MovieRental_Test\MovieRental_Test.csproj", "{C97EDDBE-E489-49B3-88AF-814F4832F794}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieRental_Test", "MovieRental_Test\MovieRental_Test.csproj", "{C97EDDBE-E489-49B3-88AF-814F4832F794}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieRental_Notification", "MovieRental_Notification\MovieRental_Notification.csproj", "{89F960A0-FA1E-420C-92F8-BAA485B7B893}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieRental_Notification", "MovieRental_Notification\MovieRental_Notification.csproj", "{89F960A0-FA1E-420C-92F8-BAA485B7B893}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieRental_AWSSecretManager", "MovieRental_AWSSecretManager\MovieRental_AWSSecretManager.csproj", "{6420977D-0A05-44D1-AB75-20CCA13B45D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{89F960A0-FA1E-420C-92F8-BAA485B7B893}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89F960A0-FA1E-420C-92F8-BAA485B7B893}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89F960A0-FA1E-420C-92F8-BAA485B7B893}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6420977D-0A05-44D1-AB75-20CCA13B45D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6420977D-0A05-44D1-AB75-20CCA13B45D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6420977D-0A05-44D1-AB75-20CCA13B45D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6420977D-0A05-44D1-AB75-20CCA13B45D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +69,7 @@ Global
 		{65572437-D310-44FD-A073-46B275027C94} = {36462A74-98A9-47CE-AF35-598E10330EC7}
 		{4BFA48D1-8578-4925-ADEE-3C28AB283F37} = {36462A74-98A9-47CE-AF35-598E10330EC7}
 		{89F960A0-FA1E-420C-92F8-BAA485B7B893} = {36462A74-98A9-47CE-AF35-598E10330EC7}
+		{6420977D-0A05-44D1-AB75-20CCA13B45D0} = {36462A74-98A9-47CE-AF35-598E10330EC7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {105D62FA-3D9E-446F-8392-7EFEFDF9F702}

@@ -24,6 +24,7 @@ using MovieRental_Repository;
 using MovieRental_Infrastructure;
 using MovieRental_Notification;
 using MovieRental_Notification.Repository;
+using MovieRental_AWSSecretManager;
 
 namespace MovieRental
 {
@@ -83,6 +84,7 @@ namespace MovieRental
                };
            });
 
+            SecretManager.GetSecret();
             // Configure database context
             services.AddMySqlDbContext(Configuration);
 

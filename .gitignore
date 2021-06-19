@@ -15,3 +15,5 @@ MovieRental/MovieRental_Test/obj/**
 MovieRental/MovieRental_Test/bin/**
 MovieRental/MovieRental_Notification/bin/**
 MovieRental/MovieRental_Notification/obj/**
+MovieRental/MovieRental_AWSSecretManager/obj/**
+MovieRental/MovieRental_AWSSecretManager/bin/**
