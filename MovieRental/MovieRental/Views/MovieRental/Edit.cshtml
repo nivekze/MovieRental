@@ -30,6 +30,7 @@
         <div class="row">
             <main role="main" class="col-md-8 col-lg-8 offset-md-2 offset-lg-2 pt-3 px-4">
                 <form id="editForm" action="@Url.Action("Update", "MovieRental")" method="post">
+                    <h3>Edit Movie</h3>
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
@@ -51,21 +52,21 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="stock">Stock</label>
-                                <input type="text" class="form-control" id="stock" name="stock" value="@Model.Stock" required>
+                                <input type="number" class="form-control" id="stock" name="stock" value="@Model.Stock" required>
 
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="salesPrice">Sales Price</label>
-                                <input type="text" class="form-control" id="salesPrice" name="salesPrice" value="@Model.SalesPrice" required>
+                                <input type="number" class="form-control" id="salesPrice" name="salesPrice" value="@Model.SalesPrice.Value.ToString("F")" step=".01" required>
 
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="rentalPrice">Rental Price</label>
-                                <input type="text" class="form-control" id="rentalPrice" name="rentalPrice" value="@Model.RentalPrice" required>
+                                <input type="number" class="form-control" id="rentalPrice" name="rentalPrice" value="@Model.RentalPrice.Value.ToString("F")" step=".01" required>
 
                             </div>
                         </div>
@@ -74,14 +75,14 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label for="popularity">Popularity</label>
-                                <input type="text" class="form-control" id="popularity" name="popularity" value="@Model.Likes" required>
+                                <input type="number" class="form-control" id="likes" name="likes" value="@Model.Likes" required>
 
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="form-group">
-                                <label for="title">Active</label>
-                                <input type="text" class="form-control" id="active" name="active" value="@Model.Available" required>
+                                <label for="title">Penalty Per Day</label>
+                                <input type="number" class="form-control" id="penaltyPerDay" name="penaltyPerDay" value="@Model.PenaltyPerDay.Value.ToString("F")" step=".01" required>
 
                             </div>
                         </div>

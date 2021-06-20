@@ -39,6 +39,12 @@ namespace MovieRental.Controllers
         public IActionResult New()
         {
             var movie = new Movie();
+            movie.SalesPrice = 0;
+            movie.RentalPrice = 0;
+            movie.PenaltyPerDay = 0;
+            movie.Stock = 0;
+            movie.Likes = 0;
+
             return View(movie);
         }
 
@@ -52,6 +58,8 @@ namespace MovieRental.Controllers
                 dbMovie.Stock = movie.Stock;
                 dbMovie.SalesPrice = movie.SalesPrice;
                 dbMovie.RentalPrice = movie.RentalPrice;
+                dbMovie.Likes = movie.Likes;
+                dbMovie.PenaltyPerDay = movie.PenaltyPerDay;
                 dbMovie.UpdatedAt = DateTime.Now;
                 _movieRepository.Update(dbMovie);
                 return Json(new { 
@@ -88,6 +96,14 @@ namespace MovieRental.Controllers
                     message = ex.Message
                 });
             }
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var movie = _movieRepository.GetById(id);
+            _movieRepository.Delete(movie);
+
+            return RedirectToAction("Index");
         }
     }
 }

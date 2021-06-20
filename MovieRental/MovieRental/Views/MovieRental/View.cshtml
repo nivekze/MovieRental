@@ -35,6 +35,7 @@
     <div class="container-fluid">
         <div class="row">
             <main role="main" class="col-md-8 col-lg-8 offset-md-2 offset-lg-2 pt-3 px-4">
+                <h3>View Movie</h3>
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group">
@@ -85,15 +86,15 @@
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <label for="title">Active</label>
-                            <input type="text" class="form-control" id="active" name="active" value="@Model.Available" readonly>
+                            <label for="title">Penalty Per Day</label>
+                            <input type="text" class="form-control" id="penaltyPerDay" name="penaltyPerDay" value="@Model.PenaltyPerDay.Value.ToString("F")" readonly>
 
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <a  href="@Url.Action("Index", "MovieRental")" class="btn btn-outline-secondary float-right">Go Back</a>
+                        <a href="@Url.Action("Index", "MovieRental")" class="btn btn-outline-secondary float-right">Go Back</a>
                     </div>
                 </div>
             </main>
