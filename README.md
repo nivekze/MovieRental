@@ -3,7 +3,7 @@ Project to manage small video rental store, powered by Kevin Omar Alvarez.
 
 ## Before run the project you would need
 
-* SQLEXPRESS
+* MySQL 8.0.20+
 * NET Core 3.1 (LTS)
 
 > Note: If you want to change database connection go to `appsettings.Development.json`
