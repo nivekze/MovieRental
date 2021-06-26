@@ -88,7 +88,7 @@ namespace MovieRental
             services.AddMySqlDbContext(Configuration, SecretManager.GetDbSecrectConnetion());
 
             // DI for Repositories
-            services.AddTransient<IUserRepository, UserRepository>();
+           services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IMovieRepository, MovieRepository>();
             services.AddTransient<IMovieLogRepository, MovieLogRepository>();
             services.AddTransient<ITransactionRepository, TransactionRepository>();

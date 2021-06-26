@@ -9,5 +9,9 @@ namespace MovieRental_Models.Helpers
         public string Secret { get; set; }
 
         public int TokenExpiresIn { get; set; }
+
+        public int ServerNumber { get; set; }
+
+        public string ServerName { get; set; }
     }
 }

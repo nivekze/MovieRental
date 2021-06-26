@@ -9,22 +9,17 @@
     <title>Movie Rental</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="~/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://s3-movie-rental.s3.amazonaws.com/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="~/dashboard.css" rel="stylesheet">
-
-    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <style type="text/css">
-        .dataTables_filter {
-            visibility: hidden !important;
-        }
-    </style>
+    <link href="https://s3-movie-rental.s3.amazonaws.com/dashboard.css" rel="stylesheet">
+    <link href="https://s3-movie-rental.s3.amazonaws.com/dist/datatable/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://s3-movie-rental.s3.amazonaws.com/dist/datatable/custom.dataTable.css" rel="stylesheet" />
 </head>
 
 <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Index", "MovieRental")">Movie Rental</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="@Url.Action("Index", "MovieRental")">Movie Rental (@ViewBag.ServerNumber)</a>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search movies by title" id="globalSearch">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
@@ -70,6 +65,10 @@
                         </tfoot>
                     </table>
                 </div>
+                <br />
+                <div class="alert alert-secondary" role="alert">
+                    This is running on server: <b>@ViewBag.ServerName</b>
+                </div>
             </main>
         </div>
     </div>
@@ -77,51 +76,11 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script>window.jQuery || document.write('<script src="~/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="~/assets/js/vendor/popper.min.js"></script>
-    <script src="~/dist/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            var table = $('#example').DataTable({
-                "processing": true,
-                "serverSide": true,
-                "ajax": "@Url.Action("GetMovies", "Movies")",
-                "columns": [
-                    { "data": "title", "orderable": false},
-                    { "data": "description", "orderable": false},
-                    { "data": "stock", "orderable": false},
-                    { "data": "salesPrice", "orderable": false },
-                    { "data": "rentalPrice", "orderable": false},
-                    { "data": "likes" },
-                    { "data": "available", "orderable": false },
-                    {
-                        "data": "id",
-                        "orderable": false,
-                        "render": function (data, type, row, meta) {
-                            return '<a href="/MovieRental/View/' + data + '">View</a> | <a href="/MovieRental/Edit/' + data + '">Edit</a> | <a href="/MovieRental/Delete/' + data + '">Delete</a>';
-                        }
-                    }               
-                ],
-                "order": [[5, 'desc']],
-                "language": {
-                    "infoFiltered": ""
-                },
-                "lengthChange": false
-            });
-
-            // #myInput is a <input type="text"> element
-            $('#globalSearch').on('keyup', function () {
-                table.search(this.value).draw();
-            });
-
-            $('#globalSearchButton').on('click', function () {
-                table.search($('#globalSearch').val()).draw();
-            })
-        });
-
-
-    </script>
+    <script type="text/javascript" src="https://s3-movie-rental.s3.amazonaws.com/dist/jquery/jquery-3.3.1.js"></script>
+    <script>window.jQuery || document.write('<script type="text/javascript" src="https://s3-movie-rental.s3.amazonaws.com/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script type="text/javascript" src="https://s3-movie-rental.s3.amazonaws.com/dist/datatable/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://s3-movie-rental.s3.amazonaws.com/assets/js/vendor/popper.min.js"></script>
+    <script type="text/javascript" src="https://s3-movie-rental.s3.amazonaws.com/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://s3-movie-rental.s3.amazonaws.com/app/js/index.js"></script>
 </body>
 </html>

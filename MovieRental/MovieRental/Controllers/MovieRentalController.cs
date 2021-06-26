@@ -3,41 +3,57 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using MovieRental_Infrastructure;
 using MovieRental_Models;
+using MovieRental_Models.Helpers;
 
 namespace MovieRental.Controllers
 {
     public class MovieRentalController : Controller
     {
         private readonly IMovieRepository _movieRepository;
+        private readonly AppSettings _appSettings;
 
         public MovieRentalController(
+            IOptions<AppSettings> settings,
               IMovieRepository movieRepository)
         {
+            _appSettings = settings.Value;
             _movieRepository = movieRepository;
-
         }
 
         public IActionResult Index()
         {
+            ViewBag.ServerNumber = _appSettings.ServerNumber;
+            ViewBag.ServerName = _appSettings.ServerName;
+
             return View();
         }
 
         public IActionResult View(int id)
         {
+            ViewBag.ServerNumber = _appSettings.ServerNumber;
+            ViewBag.ServerName = _appSettings.ServerName;
+            
             var movie = _movieRepository.GetById(id);
             return View(movie);
         }
 
         public IActionResult Edit(int id)
         {
+            ViewBag.ServerNumber = _appSettings.ServerNumber;
+            ViewBag.ServerName = _appSettings.ServerName;
+            
             var movie = _movieRepository.GetById(id);
             return View(movie);
         }
 
         public IActionResult New()
         {
+            ViewBag.ServerNumber = _appSettings.ServerNumber;
+            ViewBag.ServerName = _appSettings.ServerName;
+
             var movie = new Movie();
             movie.SalesPrice = 0;
             movie.RentalPrice = 0;
