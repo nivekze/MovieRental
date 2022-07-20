@@ -11,7 +11,7 @@ namespace MovieRental_AWSSecretManager
     {
         public static string GetSecret()
         {
-            string secretName = "CRA614/MySQL/MovieRental/Test";
+            string secretName = "DB/MySQL/MovieRental/Test";
             string region = "us-east-1";
             string secret = "";
 
