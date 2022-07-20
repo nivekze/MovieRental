@@ -26,5 +26,9 @@
     <ProjectReference Include="..\MovieRental_Repository\MovieRental_Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 
 </Project>
